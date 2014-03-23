@@ -4,7 +4,7 @@ This is a [Jekyll plugin](https://github.com/mojombo/jekyll/wiki/Plugins) that g
 
 This plugin is quite minimalist. It generates galleries with no pagination, no sub-galleries, and no descriptions. [See ggreers gallery](http://geoff.greer.fm/photos/) for an example of what it looks like.
 
-This fork adds support for displaying exif metadata on the gallery pages.
+This fork adds support for displaying exif metadata on the gallery pages, and support for descriptions of images and galleries.
 
 ![Displaying EXIF metadata](exif-example-img.jpg)
 
@@ -69,3 +69,15 @@ gallery:
     best:
       best_image: snaileo_gonzales.jpg
 ```
+
+## Image and Gallery Descriptions
+To provide descriptions for galleries and images, create `_data/imagedata.yaml`. 
+```yaml
+chile_trip:
+  description: "Description of Gallery 1"
+  IMG_1068.JPG: "Description of the image"
+japan_trip:
+  # no gallery description here, it is optional!
+  IMG_0690.JPG: "Another description"
+```
+Both the image description and the gallery description are optional.

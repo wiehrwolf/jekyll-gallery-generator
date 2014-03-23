@@ -62,6 +62,11 @@ module Jekyll
       gallery_name = gallery_name.gsub("_", " ").gsub(/\w+/) {|word| word.capitalize}
       self.data["name"] = gallery_name
       self.data["title"] = "#{gallery_title_prefix}#{gallery_name}"
+      if site.data["bilddaten"][self.data["gallery"]] != nil
+        self.data["description"] = site.data["bilddaten"][self.data["gallery"]]["description"]
+      else
+        self.data["description"] = ""
+      end
       thumbs_dir = "#{site.dest}/#{@dest_dir}/thumbs"
 
       FileUtils.mkdir_p(thumbs_dir, :mode => 0755)
@@ -69,7 +74,11 @@ module Jekyll
         if image.chars.first != "." and image.downcase().end_with?(*$image_extensions)
           image_data = {}
           image_data["image"] = image
-          image_data["caption"] = ""
+          if site.data["bilddaten"][self.data["gallery"]] != nil && site.data["bilddaten"][self.data["gallery"]][image] != nil
+            image_data["caption"] = site.data["imagedata"][self.data["gallery"]][image]
+          else
+            image_data["caption"] = ""
+          end
           begin
           image_data["model"] = EXIFR::JPEG.new("#{dir}/#{image}").model
           rescue

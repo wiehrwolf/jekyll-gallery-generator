@@ -5,7 +5,7 @@ layout: default
 {% for gallery in page.galleries %}
 <div class="gallery-image-wrapper">
     <a href="{{ gallery['gallery'] }}">
-        <img class="gallery-image" src="{{ gallery['gallery'] }}/thumbs/{{ gallery['best_image'] }}" alt="{{ gallery["name"] }}">
+        <img class="gallery-image" src="{{ gallery['gallery'] }}/thumbs/{{ gallery['best_image'] | uri_escape }}" alt="{{ gallery["name"] }}">
     </a>
     <h3><a href="{{ gallery['gallery'] }}">{{ gallery["name"] }}</a></h3>
     {% if gallery["images"].size == 1 %}
