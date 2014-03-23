@@ -67,7 +67,22 @@ module Jekyll
       FileUtils.mkdir_p(thumbs_dir, :mode => 0755)
       Dir.foreach(dir) do |image|
         if image.chars.first != "." and image.downcase().end_with?(*$image_extensions)
-          @images.push(image)
+          image_data = {}
+          image_data["image"] = image
+          image_data["caption"] = ""
+          begin
+          image_data["model"] = EXIFR::JPEG.new("#{dir}/#{image}").model
+          rescue
+          end
+          begin
+          image_data["exposure"] = EXIFR::JPEG.new("#{dir}/#{image}").exposure_time.to_s
+          rescue
+          end
+          begin
+          image_data["aperture"] = EXIFR::JPEG.new("#{dir}/#{image}").f_number.to_f
+          rescue
+          end
+          @images.push(image_data)
           best_image = image
           @site.static_files << GalleryFile.new(site, base, "#{@dest_dir}/thumbs/", image)
           if File.file?("#{thumbs_dir}/#{image}") == false or File.mtime("#{dir}/#{image}") > File.mtime("#{thumbs_dir}/#{image}")
