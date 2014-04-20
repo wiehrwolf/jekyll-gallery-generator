@@ -62,8 +62,8 @@ module Jekyll
       gallery_name = gallery_name.gsub("_", " ").gsub(/\w+/) {|word| word.capitalize}
       self.data["name"] = gallery_name
       self.data["title"] = "#{gallery_title_prefix}#{gallery_name}"
-      if site.data["bilddaten"][self.data["gallery"]] != nil
-        self.data["description"] = site.data["bilddaten"][self.data["gallery"]]["description"]
+      if site.data["imagedata"] != nil && site.data["imagedata"][self.data["gallery"]] != nil
+        self.data["description"] = site.data["imagedata"][self.data["gallery"]]["description"]
       else
         self.data["description"] = ""
       end
@@ -74,7 +74,7 @@ module Jekyll
         if image.chars.first != "." and image.downcase().end_with?(*$image_extensions)
           image_data = {}
           image_data["image"] = image
-          if site.data["bilddaten"][self.data["gallery"]] != nil && site.data["bilddaten"][self.data["gallery"]][image] != nil
+          if site.data["imagedata"] != nil && site.data["imagedata"][self.data["gallery"]] != nil && site.data["imagedata"][self.data["gallery"]][image] != nil
             image_data["caption"] = site.data["imagedata"][self.data["gallery"]][image]
           else
             image_data["caption"] = ""
