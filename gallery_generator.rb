@@ -62,7 +62,7 @@ module Jekyll
       gallery_name = gallery_name.gsub("_", " ").gsub(/\w+/) {|word| word.capitalize}
       self.data["name"] = gallery_name
       self.data["title"] = "#{gallery_title_prefix}#{gallery_name}"
-      if site.data["imagedata"] != nil && site.data["imagedata"][self.data["gallery"]] != nil
+      if site.data["imagedata"] != nil && site.data["imagedata"][self.data["gallery"]] != nil && site.data["imagedata"][self.data["gallery"]]["description"] != nil
         self.data["description"] = site.data["imagedata"][self.data["gallery"]]["description"]
       else
         self.data["description"] = ""
