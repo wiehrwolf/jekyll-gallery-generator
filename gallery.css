@@ -1,6 +1,7 @@
 .gallery-image-wrapper {
   display: inline-block;
   text-align: center;
+  vertical-align: text-top;
   max-width: 220px;
   margin: 0.5em;
 }
@@ -16,4 +17,8 @@
 }
 .gallery-image-wrapper p {
 	font-size: smaller;
+}
+.imagearea {
+	margin: 0 auto;
+	width: 100%;	
 }

@@ -4,11 +4,13 @@ layout: default
 
 <h1><a href="/{{ site.gallery.dir }}">{{ page.title }}</a></h1>
 {{ page.description | markdownify }}
+<div class="imagearea">
 {% for image in page.images %}
     <div class="gallery-image-wrapper">
         <a id="img_{{ image.image }}" href="{{ image.image | uri_escape }}"{% if site.gallery.lightbox %} rel="lightbox[{{ page.gallery }}]"{% endif %}>
-            <img class="gallery-image" src="thumbs/{{ image.image | uri_escape }}" alt="" {% if image.model != nil %} title="{{ image.model }} {{ image.exposure }} f{{ image.aperture }}" {% endif %}/>
+            <img class="gallery-image" src="thumbs/{{ image.image | uri_escape }}" alt="" {% if image.model != nil %} title="{{ image.model }} {{ image.focallength }}mm {{ image.exposure }}s f/{{ image.aperture }} ISO{{ image.iso }}" {% endif %}/>
         </a>
         {{ image.caption | markdownify }}
     </div>
 {% endfor %}
+</div>
