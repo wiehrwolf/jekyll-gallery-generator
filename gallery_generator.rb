@@ -80,15 +80,13 @@ module Jekyll
             image_data["caption"] = ""
           end
           begin
-          image_data["model"] = EXIFR::JPEG.new("#{dir}/#{image}").model
-          rescue
-          end
-          begin
-          image_data["exposure"] = EXIFR::JPEG.new("#{dir}/#{image}").exposure_time.to_s
-          rescue
-          end
-          begin
-          image_data["aperture"] = EXIFR::JPEG.new("#{dir}/#{image}").f_number.to_f
+            exif = EXIFR::JPEG.new("#{dir}/#{image}")
+            image_data["model"] = exif.model
+            image_data["exposure"] = exif.exposure_time
+            image_data["aperture"] = exif.f_number.to_f
+            image_data["iso"] = exif.iso_speed_ratings
+            image_data["date"] = exif.date_time
+            image_data["focallength"] = exif.focal_length.to_f.round
           rescue
           end
           @images.push(image_data)
