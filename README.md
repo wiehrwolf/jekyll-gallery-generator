@@ -59,6 +59,13 @@ gallery:
   thumbnail_size:
     x: 400
     y: 400
+  # image scaling method, can be "fit" or "fill", default is "fit"
+  # "fit" resizes the image and preserves aspect ratio
+  # "fill" resizes the image and crops the image to the specified size
+  # Example: source image size is 1200x600, thumbnail size is 400x400
+  # "fit": resulting image will be resized to 400x200
+  # "fill": resulting image will be resized to 800x400 and then cropped to 400x400 (center area)
+  scale_method: "fit"
   # custom configuration for individual gallery
   # best_image is image for the index page (defaults to last image)
   galleries:
